@@ -15,16 +15,18 @@ var cooldown_count = 0
 var velocity = Vector2(0, 0)
 var screen_size = Vector2(0, 0)
 var sprite_size = Vector2(0, 0)
+var alive = true
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	sprite_size = $Sprite.texture.get_size() * scale
 	position = Vector2(80, screen_size.y / 2 - sprite_size.y / 2)
-	
+
 func start():
 	show()
-	$CollisionShape2D.disabled = false	
-	
+	alive = true
+	$CollisionShape2D.disabled = false
+
 func _process(delta):
 	process_move(delta)
 	process_shoot(delta)
@@ -48,10 +50,10 @@ func process_move(delta):
 	position.x = clamp(position.x, sprite_size.x / 2, screen_size.x - sprite_size.x / 2)
 	position.y = clamp(position.y, sprite_size.y / 2, screen_size.y - sprite_size.y / 2)
 	velocity = velocity * deceleration_factor
-	
+
 func process_shoot(delta):
 	cooldown_count += delta
-	if cooldown_count > cooldown:
+	if cooldown_count > cooldown and alive:
 		shoot()
 		cooldown_count -= cooldown
 
@@ -62,11 +64,12 @@ func shoot():
 	bullet.damage = damage
 	bullet.add_to_group("player bullet")
 	get_tree().root.add_child(bullet)
-	
+
 
 func _on_Player_body_entered(body):
 	lives = lives - 1
 	if lives <= 0:
 		hide()
+		alive = false
 		emit_signal("hit")
-		$CollisionShape2D.disabled = true	
+		$CollisionShape2D.disabled = true

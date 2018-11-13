@@ -59,7 +59,10 @@ func shoot():
 	var bullet = Bullet.instance()
 	bullet.position = position + Vector2(sprite_size.x, 0)
 	bullet.direction = Vector2(1, 0)
+	bullet.damage = damage
+	bullet.add_to_group("player bullet")
 	get_tree().root.add_child(bullet)
+	
 
 func _on_Player_body_entered(body):
 	lives = lives - 1

@@ -1,14 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 
 [node name="Node2D" type="Node2D" index="0"]
 
 [node name="Player" parent="." index="0" instance=ExtResource( 1 )]
 
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.75, 0.75 )
 
 [node name="ParallaxBackground" parent="." index="1" instance=ExtResource( 2 )]
+
+[node name="Enemy" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 1163.3, 374.893 )
 
 

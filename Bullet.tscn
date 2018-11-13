@@ -1,14 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scripts/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://sprites/bullet_player.png" type="Texture" id=2]
 [ext_resource path="res://sprites/particle.png" type="Texture" id=3]
-
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 32.526, 10 )
 
 [sub_resource type="Gradient" id=2]
 
@@ -61,36 +60,49 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Initial Velocity" ]
 
-[node name="Bullet" type="Area2D" index="0"]
+[node name="Bullet" type="RigidBody2D"]
 
-scale = Vector2( 0.4, 0.3 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+input_pickable = false
+collision_layer = 1
+collision_mask = 0
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Linear" ]
 speed = 800
 special_bullet = false
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( 25, 0 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
 
 position = Vector2( 20, 0 )
 scale = Vector2( 4, 1 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
-shape = SubResource( 1 )
-
 [node name="Particles2D" type="Particles2D" parent="." index="2"]
 
 position = Vector2( -9.09305, -0.122252 )
-scale = Vector2( -2, 2 )
+rotation = -3.14159
+scale = Vector2( 2, -2 )
 emitting = true
 amount = 50
 lifetime = 1.0

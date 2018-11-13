@@ -2,12 +2,12 @@ extends Area2D
 
 signal hit
 
-export (int) var max_speed = 500
-export (int) var acceleration = 30
-export (int) var deceleration_factor = 0.85
+export (float) var max_speed = 500
+export (float) var acceleration = 30
+export (float) var deceleration_factor = 0.85
 export (int) var lives = 1
 export (int) var damage = 1
-export (int) var cooldown = 0.2
+export (float) var cooldown = 0.2
 export (PackedScene) var Bullet
 
 var speed = 0
@@ -18,7 +18,7 @@ var sprite_size = Vector2(0, 0)
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	sprite_size = $Sprite.texture.get_size()
+	sprite_size = $Sprite.texture.get_size() * scale
 	position = Vector2(80, screen_size.y / 2 - sprite_size.y / 2)
 	
 func start():

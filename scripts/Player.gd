@@ -7,7 +7,7 @@ export (float) var acceleration = 30
 export (float) var deceleration_factor = 0.85
 export (int) var lives = 1
 export (int) var damage = 1
-export (float) var cooldown = 0.2
+export (float) var cooldown = 0.5
 export (PackedScene) var Bullet
 
 var speed = 0
@@ -16,13 +16,16 @@ var velocity = Vector2(0, 0)
 var screen_size = Vector2(0, 0)
 var sprite_size = Vector2(0, 0)
 var alive = true
+var start_position
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	sprite_size = $Sprite.texture.get_size() * scale
-	position = Vector2(80, screen_size.y / 2 - sprite_size.y / 2)
+	start_position = Vector2(80, screen_size.y / 2 - sprite_size.y / 2)
+	position = start_position
 
 func start():
+	position = start_position
 	show()
 	alive = true
 	$CollisionShape2D.disabled = false

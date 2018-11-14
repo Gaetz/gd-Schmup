@@ -60,7 +60,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Initial Velocity" ]
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -81,7 +81,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Linear" ]
+_sections_unfolded = [ "Collision", "Linear", "Transform" ]
 speed = 800
 special_bullet = false
 
@@ -94,7 +94,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 position = Vector2( 20, 0 )
-scale = Vector2( 4, 1 )
+scale = Vector2( 2, 0.5 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 

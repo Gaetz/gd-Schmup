@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 40.0954, 40.0656 )
 
-[node name="Enemy" type="Area2D"]
+[node name="Enemy" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -19,6 +19,12 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 lives = 1
+time_on_screen = -1
+entry = null
+exit = null
+entry_order = null
+transition_speed = null
+main_speed = Vector2( 0, 0 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
 

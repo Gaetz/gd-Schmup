@@ -56,7 +56,9 @@ func process_move(delta):
 
 func process_shoot(delta):
 	cooldown_count += delta
-	if cooldown_count > cooldown and alive:
+	if cooldown_count > cooldown:
+		cooldown_count = cooldown
+	if Input.is_action_just_pressed("fire") and cooldown_count >= cooldown and alive:
 		shoot()
 		cooldown_count -= cooldown
 

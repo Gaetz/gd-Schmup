@@ -1,27 +1,31 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://LivesControl.gd" type="Script" id=5]
+[ext_resource path="res://scripts/LivesControl.gd" type="Script" id=5]
 
-[node name="Main" type="Node2D" index="0"]
+[node name="Main" type="Node2D"]
 
-position = Vector2( 1.87891, 2.75479 )
+position = Vector2( 1.87891, 2.75482 )
 script = ExtResource( 1 )
-number_of_tries = 3
+number_of_tries = 5
 
 [node name="Player" parent="." index="0" instance=ExtResource( 2 )]
 
 scale = Vector2( 0.75, 0.75 )
-cooldown = 0.5
 
 [node name="ParallaxBackground" parent="." index="1" instance=ExtResource( 3 )]
 
 [node name="Enemy" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 1165.57, 465.776 )
+time_on_screen = 3
+entry = 1
+exit = 3
+transition_speed = 400.0
+main_speed = Vector2( 0, 0 )
 
 [node name="RespawnTimer" type="Timer" parent="." index="3"]
 

@@ -20,6 +20,7 @@ scroll_limit_end = Vector2( 0, 0 )
 scroll_ignore_camera_zoom = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Scroll" ]
+background_speed = -5
 
 [node name="Sky" type="ParallaxLayer" parent="." index="0"]
 

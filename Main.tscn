@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Background.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scripts/LivesControl.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=4]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 position = Vector2( 1.87891, 2.75482 )
 script = ExtResource( 1 )
@@ -18,101 +17,16 @@ scale = Vector2( 0.75, 0.75 )
 
 [node name="ParallaxBackground" parent="." index="1" instance=ExtResource( 3 )]
 
-[node name="Enemy" parent="." index="2" instance=ExtResource( 4 )]
-
-position = Vector2( 1165.57, 465.776 )
-time_on_screen = 3
-entry = 1
-exit = 3
-transition_speed = 400.0
-main_speed = Vector2( 0, 0 )
-
-[node name="RespawnTimer" type="Timer" parent="." index="3"]
+[node name="RespawnTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="LivesControl" type="Control" parent="." index="4"]
+[node name="UI" parent="." index="3" instance=ExtResource( 4 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-script = ExtResource( 5 )
-
-[node name="GameOverControl" type="Control" parent="." index="5"]
-
-editor/display_folded = true
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Visibility" ]
-
-[node name="Panel" type="Panel" parent="GameOverControl" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 605.0
-margin_top = 345.0
-margin_right = 705.0
-margin_bottom = 385.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GameOverControl/Panel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 13.0
-margin_top = 13.0
-margin_right = 90.0
-margin_bottom = 28.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
-text = "Game Over"
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
+[node name="WaveSpawner" type="Node2D" parent="." index="4"]
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 

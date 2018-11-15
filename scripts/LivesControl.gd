@@ -3,7 +3,7 @@ extends Control
 var live_textures = []
 
 func _ready():
-	var lives = get_parent().number_of_tries
+	var lives = get_parent().get_parent().number_of_tries
 	for i in range(lives):
 		var text = TextureRect.new()
 		text.texture = load("res://sprites/ship.png")

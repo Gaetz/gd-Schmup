@@ -8,8 +8,8 @@ export (int) var lives = 1
 export (int) var time_on_screen = -1
 export (Entry) var entry = Entry.RIGHT
 export (Exit) var exit = Exit.LEFT
-export (int) var entry_order
-export (float) var transition_speed
+export (int) var entry_order = 0
+export (float) var transition_speed = float(400)
 export (Vector2) var main_speed = Vector2()
 
 var time_counter
@@ -19,11 +19,11 @@ var target_position
 var SECURITY_OFFSET = 200
 
 func _ready():
-	time_counter = 0.0
-	phase = Phase.ENTRY
 	set_entry_target_position()
 	
 func set_entry_target_position():
+	time_counter = 0.0
+	phase = Phase.ENTRY
 	target_position = position
 	if entry == Entry.RIGHT:
 		position.x = 1280 + SECURITY_OFFSET

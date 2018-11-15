@@ -5,7 +5,7 @@ enum Exit { NONE, RIGHT, UP, DOWN, LEFT }
 enum Phase { WAITING, ENTRY, MAIN, EXIT }
 
 export (int) var lives = 1
-export (int) var time_on_screen = -1
+export (float) var time_on_screen = -1
 export (Entry) var entry = Entry.RIGHT
 export (Exit) var exit = Exit.LEFT
 export (int) var entry_order = 0
@@ -19,30 +19,32 @@ var target_position
 var SECURITY_OFFSET = 200
 
 func _ready():
-	set_entry_target_position()
-	
-func set_entry_target_position():
+	set_entry_position()
 	time_counter = 0.0
 	phase = Phase.ENTRY
-	target_position = position
+	
+func set_entry_position():
+	var screen_size = get_viewport().size
+	target_position = Vector2(position.x, position.y)
 	if entry == Entry.RIGHT:
-		position.x = 1280 + SECURITY_OFFSET
+		position.x += screen_size.x
 	if entry == Entry.UP:
-		position.y = -SECURITY_OFFSET
+		position.y -= screen_size.y
 	if entry == Entry.DOWN:
-		position.y = 720 + SECURITY_OFFSET
+		position.y += screen_size.y
 	if entry == Entry.LEFT:
-		position.x = -SECURITY_OFFSET
+		position.x -= screen_size.x
 
 func set_exit_target_position():
+	var screen_size = get_viewport().size
 	var x = position.x
 	var y = position.y
 	if exit == Exit.RIGHT:
-		x = 1280 + SECURITY_OFFSET
+		x = screen_size.x + SECURITY_OFFSET
 	if exit == Exit.UP:
 		y = -SECURITY_OFFSET
 	if exit == Exit.DOWN:
-		y = 720 + SECURITY_OFFSET
+		y = screen_size.y + SECURITY_OFFSET
 	if exit == Exit.LEFT:
 		x = -SECURITY_OFFSET
 	target_position = Vector2(x, y)
@@ -64,17 +66,17 @@ func process_entry(delta):
 			position.x -= transition_speed * delta
 		else:
 			change_phase(Phase.MAIN)
-	if entry == Entry.UP:
+	elif entry == Entry.UP:
 		if position.y < target_position.y:
 			position.y += transition_speed * delta
 		else:
 			change_phase(Phase.MAIN)
-	if entry == Entry.DOWN:
+	elif entry == Entry.DOWN:
 		if position.y > target_position.y:
 			position.y -= transition_speed * delta
 		else:
 			change_phase(Phase.MAIN)
-	if entry == Entry.RIGHT:
+	elif entry == Entry.RIGHT:
 		if position.x < target_position.x:
 			position.x += transition_speed * delta
 		else:

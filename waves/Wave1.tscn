@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://waves/Wave.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objets/Enemy.tscn" type="PackedScene" id=2]
+
+[node name="Wave1" index="0" instance=ExtResource( 1 )]
+
+[node name="Enemy" parent="." index="0" instance=ExtResource( 2 )]
+
+position = Vector2( 866.595, 77.437 )
+time_on_screen = 7.0
+entry = 1
+exit = 4
+entry_order = 0
+transition_speed = 600.0
+
+[node name="Enemy2" parent="." index="1" instance=ExtResource( 2 )]
+
+position = Vector2( 1024.49, 217.874 )
+time_on_screen = 7.5
+entry = 1
+exit = 4
+entry_order = 0
+transition_speed = 600.0
+
+[node name="Enemy3" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 1196.73, 367.564 )
+time_on_screen = 8.0
+exit = 4
+entry_order = 0
+transition_speed = 600.0
+
+[node name="Enemy4" parent="." index="3" instance=ExtResource( 2 )]
+
+position = Vector2( 1026.54, 513.153 )
+time_on_screen = 7.5
+entry = 2
+exit = 4
+entry_order = 0
+transition_speed = 600.0
+
+[node name="Enemy5" parent="." index="4" instance=ExtResource( 2 )]
+
+position = Vector2( 878.899, 648.489 )
+time_on_screen = 7.0
+entry = 2
+exit = 4
+entry_order = 0
+transition_speed = 600.0
+
+

@@ -15,6 +15,10 @@ run/main_scene="res://Main.tscn"
 config/use_custom_user_dir=true
 config/icon="res://icon.png"
 
+[autoload]
+
+LD="*res://LD.gd"
+
 [display]
 
 window/size/width=1280

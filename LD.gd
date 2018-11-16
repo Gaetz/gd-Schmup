@@ -9,16 +9,16 @@ var triggered_waves = [] # ids of triggered waves
 
 
 func _ready():
-	# Load, instanciate and store each wave
+	""" Load, instanciate and store each wave """
 	for wave in waves:
 		var path = "res://"+wave["path"]
 		var scene = load(path)
 		wave["scene"] = scene.instance()
 
 func _process(delta):
-	# Trigger each wave with the proper timing
+	""" Trigger each wave with the proper timing """
 	counter += delta
 	for wave in waves:
 		if counter >= wave["timing"] and (not triggered_waves.has(wave["id"])):
 			triggered_waves.append(wave["id"])
-			add_child(wave["scene"])
+			get_node("/root/Main").add_child(wave["scene"])

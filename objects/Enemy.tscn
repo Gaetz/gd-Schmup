@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 40.0954, 40.0656 )
 
-[node name="Enemy" type="Area2D" index="0"]
+[node name="Enemy" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -16,6 +16,7 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 collision_layer = 2
+collision_mask = 9
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
@@ -28,40 +29,14 @@ entry_order = 0
 transition_speed = 400.0
 main_speed = Vector2( 0, 0 )
 
-[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
-
-input_pickable = false
-collision_layer = 2
-collision_mask = 0
-mode = 0
-mass = 1.0
-friction = 1.0
-bounce = 0.0
-gravity_scale = 0.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
-
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_Enemy_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
 
 

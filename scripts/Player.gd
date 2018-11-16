@@ -7,7 +7,7 @@ export (float) var acceleration = 30
 export (float) var deceleration_factor = 0.85
 export (int) var lives = 1
 export (int) var damage = 1
-export (float) var cooldown = 0.25
+export (float) var cooldown = 0.2
 export (PackedScene) var Bullet
 
 var speed = 0
@@ -70,7 +70,7 @@ func shoot():
 	bullet.add_to_group("player bullet")
 	get_tree().root.add_child(bullet)
 
-func _on_Player_body_entered(body):
+func _on_Player_area_entered(area):
 	lives = lives - 1
 	if lives <= 0:
 		hide()

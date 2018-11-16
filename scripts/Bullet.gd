@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 export (int) var speed = 800
 export (bool) var special_bullet = false
@@ -10,10 +10,9 @@ var damage = 1
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	linear_velocity = direction.normalized() * speed
+	velocity = direction.normalized() * speed
 
 func _process(delta):
-
 	position = position + velocity * delta
 	if out_of_screen():
 		queue_free()

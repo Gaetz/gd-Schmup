@@ -121,12 +121,12 @@ func is_on_screen():
 	)
 
 # Damages
-func _on_Enemy_body_entered(body):
-	if body in get_tree().get_nodes_in_group("player bullet"):
-		damage(body)
 		
 func damage(bullet):
 	lives -= bullet.damage()
 	if lives <= 0:
 		queue_free()
 
+func _on_Enemy_area_entered(area):
+	if area in get_tree().get_nodes_in_group("player bullet"):
+		damage(area)

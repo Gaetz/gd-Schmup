@@ -9,14 +9,14 @@
 custom_solver_bias = 0.0
 extents = Vector2( 36.1773, 34.626 )
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-collision_layer = 7
+collision_layer = 8
 collision_mask = 6
 audio_bus_override = false
 audio_bus_name = "Master"
@@ -27,7 +27,7 @@ acceleration = 30
 deceleration_factor = 0.85
 lives = 1
 damage = 1
-cooldown = 0.25
+cooldown = 0.2
 Bullet = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
@@ -38,6 +38,6 @@ texture = ExtResource( 3 )
 
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
 
 

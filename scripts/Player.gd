@@ -68,7 +68,7 @@ func shoot():
 	bullet.direction = Vector2(1, 0)
 	bullet.damage = damage
 	bullet.add_to_group("player bullet")
-	get_tree().root.add_child(bullet)
+	get_node("/root/Main").add_child(bullet)
 
 func _on_Player_area_entered(area):
 	lives = lives - 1

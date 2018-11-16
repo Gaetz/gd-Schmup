@@ -5,7 +5,7 @@
 [ext_resource path="res://objects/Background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/UI.tscn" type="PackedScene" id=4]
 
-[node name="Main" type="Node2D" index="0"]
+[node name="Main" type="Node2D"]
 
 position = Vector2( 1.87891, 2.75482 )
 script = ExtResource( 1 )
@@ -14,7 +14,6 @@ number_of_tries = 5
 [node name="Player" parent="." index="0" instance=ExtResource( 2 )]
 
 scale = Vector2( 0.75, 0.75 )
-cooldown = 0.2
 
 [node name="ParallaxBackground" parent="." index="1" instance=ExtResource( 3 )]
 

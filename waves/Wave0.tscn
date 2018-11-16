@@ -7,12 +7,11 @@
 
 [node name="Enemy" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 1017.62, 193.63 )
+position = Vector2( 1017.62, 194.63 )
 time_on_screen = 3.0
 entry = 1
 exit = 2
-entry_order = 0
-transition_speed = 400.0
+bullet_cooldown = 1.0
 
 [node name="Enemy2" parent="." index="1" instance=ExtResource( 2 )]
 
@@ -20,17 +19,15 @@ position = Vector2( 881.294, 338.043 )
 time_on_screen = 3.0
 entry = 1
 exit = 3
-entry_order = 0
-transition_speed = 400.0
+bullet_cooldown = 1.0
 
 [node name="Enemy3" parent="." index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 1019.89, 486 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 time_on_screen = 3.0
 entry = 1
 exit = 2
-entry_order = 0
-transition_speed = 400.0
+bullet_cooldown = 1.0
 
 

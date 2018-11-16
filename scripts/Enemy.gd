@@ -1,4 +1,5 @@
 extends Area2D
+var bullet = preload("res://objects/Bullet.tscn")
 
 enum Entry { NONE, RIGHT, UP, DOWN, LEFT }
 enum Exit { NONE, RIGHT, UP, DOWN, LEFT }
@@ -11,10 +12,12 @@ export (Exit) var exit = Exit.LEFT
 export (int) var entry_order = 0
 export (float) var transition_speed = float(400)
 export (Vector2) var main_speed = Vector2()
+export (float) var bullet_cooldown = 0
 
 var time_counter
 var phase
 var target_position
+var bullet_counter
 
 var SECURITY_OFFSET = 200
 
@@ -22,6 +25,7 @@ func _ready():
 	set_entry_position()
 	time_counter = 0.0
 	phase = Phase.ENTRY
+	bullet_counter = 0.0
 	
 func set_entry_position():
 	var screen_size = get_viewport().size
@@ -54,6 +58,8 @@ func _process(delta):
 		process_entry(delta)
 	elif phase == Phase.MAIN:
 		process_main(delta)
+		if bullet_cooldown > 0:
+			process_shoot(delta)
 	elif phase == Phase.EXIT:
 		process_exit(delta)
 
@@ -120,10 +126,25 @@ func is_on_screen():
 		position.y > -SECURITY_OFFSET and position.y < 720 + SECURITY_OFFSET
 	)
 
-# Damages
+# Bullet and damages
 		
-func damage(bullet):
-	lives -= bullet.damage()
+func process_shoot(delta):
+	bullet_counter += delta
+	if bullet_counter > bullet_cooldown:
+		shoot()
+		bullet_counter -= bullet_cooldown
+
+func shoot():
+	var b = bullet.instance()
+	var sprite_size = $Sprite.texture.get_size()
+	b.enemy_bullet = true
+	b.position = position + Vector2(-sprite_size.x / 2 - 25, 0)
+	b.direction = Vector2(-1, 0)
+	b.damage = 1
+	get_node("/root/Main").add_child(b)
+		
+func damage(b):
+	lives -= b.damage()
 	if lives <= 0:
 		queue_free()
 

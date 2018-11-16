@@ -1,7 +1,9 @@
 extends Area2D
+var enemy_sprite = preload("res://sprites/bullet_enemy.png")
 
 export (int) var speed = 800
 export (bool) var special_bullet = false
+export (bool) var enemy_bullet = false
 
 var direction = Vector2()
 var velocity = Vector2()
@@ -11,6 +13,12 @@ var damage = 1
 func _ready():
 	screen_size = get_viewport_rect().size
 	velocity = direction.normalized() * speed
+	if enemy_bullet:
+		$Sprite.texture = enemy_sprite
+		set_collision_layer_bit(0, false)
+		set_collision_layer_bit(2, true)
+		$Particles2D.emitting = false
+		$Sprite.scale = Vector2(1, 1)
 
 func _process(delta):
 	position = position + velocity * delta
@@ -22,4 +30,5 @@ func out_of_screen():
 	and position.y >= 0 and position.y <= screen_size.y)
 	
 func damage():
+	queue_free()
 	return damage

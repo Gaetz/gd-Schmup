@@ -60,7 +60,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Initial Velocity" ]
 
-[node name="Bullet" type="RigidBody2D" index="0"]
+[node name="Bullet" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 1

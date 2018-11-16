@@ -7,7 +7,7 @@ export (float) var acceleration = 30
 export (float) var deceleration_factor = 0.85
 export (int) var lives = 1
 export (int) var damage = 1
-export (float) var cooldown = 0.5
+export (float) var cooldown = 0.25
 export (PackedScene) var Bullet
 
 var speed = 0
@@ -69,7 +69,6 @@ func shoot():
 	bullet.damage = damage
 	bullet.add_to_group("player bullet")
 	get_tree().root.add_child(bullet)
-
 
 func _on_Player_body_entered(body):
 	lives = lives - 1

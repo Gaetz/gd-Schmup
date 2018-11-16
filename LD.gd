@@ -6,15 +6,17 @@ var waves = [
 	{ "id": 1, "path": "waves/Wave1.tscn", "timing": 10 }
 ]
 var triggered_waves = [] # ids of triggered waves
-var current_wave
+
 
 func _ready():
+	# Load, instanciate and store each wave
 	for wave in waves:
 		var path = "res://"+wave["path"]
 		var scene = load(path)
 		wave["scene"] = scene.instance()
 
 func _process(delta):
+	# Trigger each wave with the proper timing
 	counter += delta
 	for wave in waves:
 		if counter >= wave["timing"] and (not triggered_waves.has(wave["id"])):

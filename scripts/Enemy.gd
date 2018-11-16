@@ -1,6 +1,6 @@
 extends Area2D
 
-enum Entry { RIGHT, UP, DOWN, LEFT }
+enum Entry { NONE, RIGHT, UP, DOWN, LEFT }
 enum Exit { NONE, RIGHT, UP, DOWN, LEFT }
 enum Phase { WAITING, ENTRY, MAIN, EXIT }
 
@@ -98,17 +98,17 @@ func process_exit(delta):
 			position.x += transition_speed * delta
 		else:
 			queue_free()
-	if exit == Exit.UP:
+	elif exit == Exit.UP:
 		if position.y > target_position.y:
 			position.y -= transition_speed * delta
 		else:
 			queue_free()
-	if exit == Exit.DOWN:
+	elif exit == Exit.DOWN:
 		if position.y < target_position.y:
 			position.y += transition_speed * delta
 		else:
 			queue_free()
-	if exit == Exit.RIGHT:
+	elif exit == Exit.LEFT:
 		if position.x > target_position.x:
 			position.x -= transition_speed * delta
 		else:

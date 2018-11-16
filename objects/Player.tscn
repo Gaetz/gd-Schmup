@@ -1,8 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://objets/Bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/ship.png" type="Texture" id=3]
+
+
 
 
 

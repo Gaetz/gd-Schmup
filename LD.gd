@@ -1,12 +1,11 @@
 extends Node2D
 
-var counter = 0 
 var waves = [
 	{ "id": 0, "path": "waves/Wave0.tscn", "timing": 2 },
 	{ "id": 1, "path": "waves/Wave1.tscn", "timing": 10 }
 ]
 var triggered_waves = [] # ids of triggered waves
-
+var counter = 0 
 
 func _ready():
 	""" Load, instanciate and store each wave """

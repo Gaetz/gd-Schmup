@@ -1,5 +1,7 @@
 extends Area2D
 var bullet = preload("res://objects/Bullet.tscn")
+var damage_particle = preload("res://objects/DamageParticule.tscn")
+var destruction_particle = preload("res://objects/DestructionParticule.tscn")
 
 enum Entry { NONE, RIGHT, UP, DOWN, LEFT }
 enum Exit { NONE, RIGHT, UP, DOWN, LEFT }
@@ -146,8 +148,18 @@ func shoot():
 func damage(b):
 	lives -= b.damage()
 	if lives <= 0:
+		var particle = destruction_particle.instance()
+		particle.position = position
+		particle.emitting = true
+		get_node("/root/Main").add_child(particle)
 		queue_free()
 
 func _on_Enemy_area_entered(area):
 	if area in get_tree().get_nodes_in_group("player bullet"):
+		var particle = damage_particle.instance()
+		var rx = randi()%11+1 - 6
+		var ry = randi()%11+1 - 6
+		particle.position = area.position + Vector2(rx+20, ry)
+		particle.emitting = true
+		get_node("/root/Main").add_child(particle)
 		damage(area)

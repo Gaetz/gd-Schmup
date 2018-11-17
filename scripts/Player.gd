@@ -1,4 +1,5 @@
 extends Area2D
+var destruction_particle = preload("res://objects/DestructionParticule.tscn")
 
 signal hit
 
@@ -73,6 +74,10 @@ func shoot():
 func _on_Player_area_entered(area):
 	lives = lives - 1
 	if lives <= 0:
+		var particle = destruction_particle.instance()
+		particle.position = position
+		particle.emitting = true
+		get_node("/root/Main").add_child(particle)
 		hide()
 		alive = false
 		emit_signal("hit")

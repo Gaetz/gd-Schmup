@@ -1,7 +1,7 @@
 extends Area2D
-var bullet = preload("res://objects/Bullet.tscn")
-var damage_particle = preload("res://objects/DamageParticule.tscn")
+
 var destruction_particle = preload("res://objects/DestructionParticule.tscn")
+var damage_particle = preload("res://objects/DamageParticule.tscn")
 
 enum Entry { NONE, RIGHT, UP, DOWN, LEFT }
 enum Exit { NONE, RIGHT, UP, DOWN, LEFT }
@@ -14,12 +14,10 @@ export (Exit) var exit = Exit.LEFT
 export (int) var entry_order = 0
 export (float) var transition_speed = float(400)
 export (Vector2) var main_speed = Vector2()
-export (float) var bullet_cooldown = 0
 
-var time_counter
 var phase
 var target_position
-var bullet_counter
+var time_counter
 
 var SECURITY_OFFSET = 200
 
@@ -27,8 +25,8 @@ func _ready():
 	set_entry_position()
 	time_counter = 0.0
 	phase = Phase.ENTRY
-	bullet_counter = 0.0
-	
+	set_generators_active(false)
+
 func set_entry_position():
 	var screen_size = get_viewport().size
 	target_position = Vector2(position.x, position.y)
@@ -60,13 +58,20 @@ func _process(delta):
 		process_entry(delta)
 	elif phase == Phase.MAIN:
 		process_main(delta)
-		if bullet_cooldown > 0:
-			process_shoot(delta)
 	elif phase == Phase.EXIT:
 		process_exit(delta)
 
 func change_phase(new_phase):
 	phase = new_phase
+	if new_phase == Phase.MAIN:
+		set_generators_active(true)
+	if new_phase == Phase.EXIT:
+		set_generators_active(false)
+
+func set_generators_active(b):
+	for child in get_children():
+		if "generator" in child.get_groups():
+			child.set_process(b)
 
 func process_entry(delta):
 	if entry == Entry.RIGHT:
@@ -128,32 +133,7 @@ func is_on_screen():
 		position.y > -SECURITY_OFFSET and position.y < 720 + SECURITY_OFFSET
 	)
 
-# Bullet and damages
-		
-func process_shoot(delta):
-	bullet_counter += delta
-	if bullet_counter > bullet_cooldown:
-		shoot()
-		bullet_counter -= bullet_cooldown
-
-func shoot():
-	var b = bullet.instance()
-	var sprite_size = $Sprite.texture.get_size()
-	b.enemy_bullet = true
-	b.position = position + Vector2(-sprite_size.x / 2 - 25, 0)
-	b.direction = Vector2(-1, 0)
-	b.damage = 1
-	get_node("/root/Main").add_child(b)
-		
-func damage(b):
-	lives -= b.damage()
-	if lives <= 0:
-		var particle = destruction_particle.instance()
-		particle.position = position
-		particle.emitting = true
-		get_node("/root/Main").add_child(particle)
-		queue_free()
-
+# Collisions
 func _on_Enemy_area_entered(area):
 	if area in get_tree().get_nodes_in_group("player bullet"):
 		var particle = damage_particle.instance()
@@ -163,3 +143,12 @@ func _on_Enemy_area_entered(area):
 		particle.emitting = true
 		get_node("/root/Main").add_child(particle)
 		damage(area)
+
+func damage(b):
+	lives -= b.damage()
+	if lives <= 0:
+		var particle = destruction_particle.instance()
+		particle.position = position
+		particle.emitting = true
+		get_node("/root/Main").add_child(particle)
+		queue_free()

@@ -4,7 +4,7 @@
 [ext_resource path="res://sprites/bullet_player.png" type="Texture" id=2]
 [ext_resource path="res://sprites/particle.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 19.7905, 5.11638 )
@@ -60,7 +60,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Initial Velocity" ]
 
-[node name="Area2D" type="Area2D" index="0"]
+[node name="Bullet" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -79,7 +79,7 @@ enemy_bullet = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 position = Vector2( 15, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]

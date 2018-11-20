@@ -29,20 +29,15 @@ func _process(delta):
 		bullet_counter -= bullet_cooldown
 
 func shoot():
+	var b = bullet.instance()
+	b.enemy_bullet = true
+	b.position = global_position
+	b.damage = 1
 	if type == ShotType.CIRCLE and circle_bullet_number != 0:
-		var bullets = []
 		for i in range(0, circle_bullet_number):
-			var b = bullet.instance()
-			b.enemy_bullet = true
-			b.position = global_position
-			b.damage = 1
 			b.angle = 360.0 / float(circle_bullet_number) * i
 			get_node("/root/Main").add_child(b)
 	else:
-		var b = bullet.instance()
-		b.enemy_bullet = true
-		b.position = global_position
-		b.damage = 1
 		if type == ShotType.LINE:
 			b.angle = 180 - line_angle
 		elif type == ShotType.FAN:

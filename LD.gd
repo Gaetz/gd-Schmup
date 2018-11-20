@@ -2,7 +2,8 @@ extends Node2D
 
 var waves = [
 	{ "id": 0, "path": "waves/Wave0.tscn", "timing": 2 },
-	{ "id": 1, "path": "waves/Wave1.tscn", "timing": 10 }
+	{ "id": 1, "path": "waves/Wave1.tscn", "timing": 10 },
+	{ "id": 2, "path": "waves/Wave2.tscn", "timing": 18 }
 ]
 var triggered_waves = [] # ids of triggered waves
 var counter = 0 

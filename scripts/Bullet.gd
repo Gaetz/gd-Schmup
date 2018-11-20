@@ -15,7 +15,6 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	if enemy_bullet:
 		$Sprite.texture = enemy_sprite
-		angle = 180
 		set_collision_layer_bit(0, false)
 		set_collision_layer_bit(2, true)
 		$Particles2D.emitting = false

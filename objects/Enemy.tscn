@@ -7,9 +7,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 40.0954, 40.0656 )
+extents = Vector2( 40.0514, 40.0654 )
 
-[node name="Enemy" type="Area2D" index="0"]
+[node name="Enemy" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -43,6 +43,7 @@ shape = SubResource( 1 )
 
 position = Vector2( -49.9769, -0.122923 )
 bullet_cooldown = 1.0
+type = 1
 
 [connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
 

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/Enemy.tscn" type="PackedScene" id=1]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="0"]
+
+modulate = Color( 0.710938, 0, 1, 1 )
+
+[node name="BulletGenerator" parent="." index="2"]
+
+bullet_cooldown = 0.2
+type = 3
+fan_angle_speed = 10
+
+
